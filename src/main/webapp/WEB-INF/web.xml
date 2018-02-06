@@ -15,4 +15,9 @@
     <servlet-name>Jersey Web Application</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
+  <persistence-context-ref>
+		<persistence-context-ref-name>my-pu</persistence-context-ref-name>
+		<persistence-unit-name>my-pu</persistence-unit-name>
+	</persistence-context-ref>
+  
 </web-app>
