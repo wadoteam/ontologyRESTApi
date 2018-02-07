@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -20,7 +22,17 @@ public class UsersRS {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces("application/json")
-	public List<User> getDocuments(){
-		return this.em.createQuery("select s from Student s").getResultList();
+	public List<User> getUsers(){
+		return this.em.createQuery("select u from Users u").getResultList();
 	}
+	
+	@POST
+	@Consumes("application/json")
+	@Produces("application/json")
+	public User addUser(User user){
+		this.em.persist(user);
+		return user;
+	}
+	
+	
 }
