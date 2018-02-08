@@ -22,7 +22,7 @@ public class Project implements Serializable{
 	private String title;
 	
 	@ManyToOne
-	@JoinColumn(name="email")
+	@JoinColumn(name = "email", referencedColumnName = "email", nullable = false)
 	private User user;
 
 	public Integer getProjectId() {
