@@ -6,8 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.model.Repository;
-import io.swagger.sparql.ArhitectureRequest;
-import io.swagger.sparql.SecurityRequest;
+import io.swagger.sparql.ArchitecturalPatternRequest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,7 +28,7 @@ public class ArhitectureApi {
             @ApiResponse(code = 200, message = "successful operation", response = Repository.class, responseContainer = "List")})
     public Response getRepositories(@PathParam("project") String project) {
 
-        ArhitectureRequest response = new ArhitectureRequest();
+        ArchitecturalPatternRequest response = new ArchitecturalPatternRequest();
         System.out.println(response.toString());
 
 

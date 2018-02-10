@@ -1,21 +1,33 @@
 package io.swagger.sparql;
 
+import org.apache.jena.arq.querybuilder.SelectBuilder;
 import org.apache.jena.query.*;
+import org.apache.jena.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDFS;
 
-public class RecomandationRequests implements SparqlRequest {
+import java.util.Map;
 
+public class RecomandationRequests extends SparqlRequest {
+
+    private String classToBeRecomadate;
+
+    public RecomandationRequests(String c) {
+        this.classToBeRecomadate = c;
+    }
 
     public ResultSet get() {
-        String sparqlQuery = "select distinct ?language ?a where {\n" +
-                "  ?language rdf:type base:Language.\n" +
-                "}";
+        Map<String, String> classes = Utils.getFeatureMap();
 
-        Query query = QueryFactory.create(sparqlQuery);
-        QueryExecution qexec = QueryExecutionFactory.sparqlService(SparqlEndpoint.endpoint, query);
+        SelectBuilder sb = new SelectBuilder()
+                .addVar( "?recomandation" )
+                .addVar( "?repo" )
+                .addVar( "?issue" )
+                .addWhere( "?recomandation", RDF.type, classes.get(classToBeRecomadate) )
+                .addWhere( "?recomandation", "base:hasRepository", "?repo" )
+                .addWhere( "?repo", "base:hasIssue", "?issue" )
+                .addOptional("?knownFeature", RDFS.subClassOf,"?parrentClass")
+                .addOptional("?recomandation", RDFS.subClassOf,"?parrentClass");
 
-        ResultSet results = qexec.execSelect();
-
-        qexec.close();
-        return results;
+        return runQuery(sb);
     }
 }
