@@ -14,6 +14,7 @@ abstract class SparqlRequest {
         for (Map.Entry<String, String> entry : prefixes.entrySet()) {
             sb.addPrefix(entry.getKey(), entry.getValue());
         }
+        sb.setLimit(100);
 
         Query query = QueryFactory.create(sb.buildString());
         QueryExecution qexec = QueryExecutionFactory.sparqlService(SparqlEndpoint.endpoint, query);
