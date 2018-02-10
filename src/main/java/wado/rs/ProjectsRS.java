@@ -4,16 +4,19 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import wado.model.Project;
-import wado.model.User;
 
 @Path("/projects")
+@Transactional
 public class ProjectsRS {
 	@PersistenceContext(unitName = "my-pu")
 	private EntityManager em;
@@ -22,19 +25,13 @@ public class ProjectsRS {
 	@GET
 	@Produces("application/json")
 	public List<Project> getProjects() {
-		return this.em.createQuery("select p from Projects p").getResultList();
+		return this.em.createQuery("select p from Project p").getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@GET
+	@Path("/{id}")
 	@Produces("application/json")
-	public List<Project> getProjectsByUser(String user) {
-		return this.em.createQuery("select p from Projects p where email=?").setParameter(1, user).getResultList();
-	}
-	
-	@GET
-	@Produces("application/json")
-	public Project getProjectById(Integer projectId) {
+	public Project getProjectById(@PathParam("id") Integer projectId) {
 		return this.em.find(Project.class, projectId);
 	}
 
@@ -42,13 +39,17 @@ public class ProjectsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Project saveProject(Project project) {
-		if(this.getProjectById(project.getProjectId()) != null){
+		if (this.getProjectById(project.getProjectId()) != null) {
 			this.em.merge(project);
-		}
-		else{
+		} else {
 			this.em.persist(project);
 		}
 		return project;
 	}
-
+	
+	@DELETE
+	@Path("/{id}")
+	public void deleteProject(@PathParam("id")Integer id){
+		this.em.remove(this.getProjectById(id));
+	}
 }

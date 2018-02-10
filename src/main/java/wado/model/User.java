@@ -1,10 +1,12 @@
 package wado.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,8 +22,8 @@ public class User implements Serializable{
 	@Column
 	private String password;
 	
-	@OneToMany
-	private List<Project> projects;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	private Set<Project> projects;
 
 	public String getEmail() {
 		return email;
@@ -39,11 +41,11 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public List<Project> getProjects() {
+/*	public Set<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
-	}
+	}*/
 }
