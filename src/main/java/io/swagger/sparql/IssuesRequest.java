@@ -2,7 +2,7 @@ package io.swagger.sparql;
 
 import org.apache.jena.query.*;
 
-public class IssuesRequest implements SparqlRequest {
+public class IssuesRequest extends SparqlRequest {
 
     private String repo;
     public IssuesRequest(String repo) {
