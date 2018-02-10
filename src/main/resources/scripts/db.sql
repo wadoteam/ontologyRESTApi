@@ -1,18 +1,18 @@
 CREATE TABLE users (
-    email      VARCHAR2(100),
-    password   VARCHAR2(300)
+    email      VARCHAR(100),
+    password   VARCHAR(300)
 );
 
 CREATE TABLE projects (
-    project_id   NUMBER,
-    email        VARCHAR2(100),
-    title        VARCHAR2(100)
+    project_id   INT,
+    email        VARCHAR(100),
+    title        VARCHAR(100)
 );
 
 CREATE TABLE caracteristics (
-    project_id            NUMBER,
-    caracteristic_type    VARCHAR2(200),
-    caracteristic_value   VARCHAR2(500)
+    project_id            INT,
+    caracteristic_type    VARCHAR(200),
+    caracteristic_value   VARCHAR(500)
 );
 
 ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY ( email );
