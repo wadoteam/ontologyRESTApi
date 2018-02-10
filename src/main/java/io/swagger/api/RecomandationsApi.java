@@ -27,7 +27,7 @@ public class RecomandationsApi {
             @ApiResponse(code = 200, message = "successful operation", response = Repository.class, responseContainer = "List")})
     public Response getRepositories(@PathParam("project") String project) {
 
-        RecomandationRequests response = new RecomandationRequests();
+        RecomandationRequests response = new RecomandationRequests(project);
         System.out.println(response.toString());
 
 
