@@ -7,6 +7,6 @@ import javax.ws.rs.Path;
 public class Application {
     @GET
     public String getProjects() {
-        return "Traiasca berea";
+        return "WADO API";
     }
 }
