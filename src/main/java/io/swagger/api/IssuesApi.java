@@ -13,21 +13,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("/{project}/recomandation")
 
-@Api(description = "the recomandation API")
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2018-01-31T23:29:20.245Z")
-
-public class RecomandationsApi {
+public class IssuesApi {
     @GET
     @Produces({"application/json"})
-    @ApiOperation(value = "Get recomandation for a project", notes = "Get recomandation", response = Repository.class, responseContainer = "List", tags = {"repository"})
+    @ApiOperation(value = "Get issues for a project", notes = "Get issues", response = Repository.class, responseContainer = "List", tags = {"repository"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = Repository.class, responseContainer = "List")})
     public Response getRepositories(@PathParam("project") String project) {
 
-        RecomandationRequests response = new RecomandationRequests();
+        IssuesApi response = new IssuesApi();
         System.out.println(response.toString());
 
 

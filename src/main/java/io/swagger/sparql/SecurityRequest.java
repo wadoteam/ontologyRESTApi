@@ -2,9 +2,7 @@ package io.swagger.sparql;
 
 import org.apache.jena.query.*;
 
-public class RecomandationRequests implements SparqlRequest {
-
-
+public class SecurityRequest implements SparqlRequest{
     public ResultSet get() {
         String sparqlQuery = "select distinct ?language ?a where {\n" +
                 "  ?language rdf:type base:Language.\n" +
