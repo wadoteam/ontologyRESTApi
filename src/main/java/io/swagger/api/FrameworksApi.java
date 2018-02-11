@@ -3,6 +3,7 @@ package io.swagger.api;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import io.swagger.annotations.Api;
@@ -31,6 +32,15 @@ public class FrameworksApi  {
         @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
     public Response getFrameworks() {
         return Response.ok().entity(request.getAllFrameworks()).build();
+    }
+
+    @GET()
+    @Produces({ "application/json" })
+    @ApiOperation(value = "Get frameworks", notes = "Get a list of available frameworks", response = Framework.class, responseContainer = "List", tags={ "concepts" })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
+    public Response getFrameworksByLanguage(@QueryParam("language")String language) {
+        return Response.ok().entity(request.getFrameworksByLanguage(language)).build();
     }
 }
 

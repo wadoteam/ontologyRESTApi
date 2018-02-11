@@ -14,6 +14,11 @@ public class FrameworkRequest extends SparqlRequest {
 		String query = "SELECT ?framework  " + "WHERE { ?framework rdf:type base2:Framework }";
 		return toList(runQuery(query));
 	}
+	
+	public List<Map<String, String>> getFrameworksByLanguage(String language) {
+		String query = "SELECT ?framework  " + "WHERE { ?framework rdf:type base2:Framework }";
+		return toList(runQuery(query));
+	}
 
 	public List<Map<String, String>> toList(ResultSet rs) {
 		List<Map<String, String>> results = new ArrayList<>();
