@@ -1,14 +1,17 @@
 package io.swagger.api;
 
-import io.swagger.model.Framework;
-
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import io.swagger.annotations.*;
-
-import java.util.List;
-import javax.validation.constraints.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.model.Framework;
+import io.swagger.sparql.FrameworkRequest;
 
 @Path("/frameworks")
 
@@ -20,26 +23,24 @@ import javax.validation.constraints.*;
 
 public class FrameworksApi  {
 
+	private FrameworkRequest request = new FrameworkRequest();
+	
     @GET
-    @Path("/{name}")
-    
-    @Produces({ "application/json" })
-    @ApiOperation(value = "Get a framework by name", notes = "Get a framework by name", response = Framework.class, tags={ "concepts",  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Framework.class) })
-    public Response getFrameworkByName(@PathParam("name") @ApiParam("The name of the framework") String name) {
-        return Response.ok().entity("magic!").build();
-    }
-
-    @GET
-    
-    
     @Produces({ "application/json" })
     @ApiOperation(value = "Get frameworks", notes = "Get a list of available frameworks", response = Framework.class, responseContainer = "List", tags={ "concepts" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
-    public Response getFrameworks(@QueryParam("has_support_for_programming_language")  String hasSupportForProgrammingLanguage,@QueryParam("has_paradigm")  String hasParadigm) {
-        return Response.ok().entity("magic!").build();
+    public Response getFrameworks() {
+        return Response.ok().entity(request.getAllFrameworks()).build();
     }
+
+    /*@GET
+    @Produces({ "application/json" })
+    @ApiOperation(value = "Get frameworks", notes = "Get a list of available frameworks", response = Framework.class, responseContainer = "List", tags={ "concepts" })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
+    public Response getFrameworksByLanguage(@QueryParam("language")String language) {
+        return Response.ok().entity(request.getFrameworksByLanguage(language)).build();
+    }*/
 }
 

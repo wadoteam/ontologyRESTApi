@@ -1,6 +1,6 @@
 package io.swagger.model;
 
-import io.swagger.model.ProgrammingLanguage;
+import io.swagger.model.Language;
 import javax.validation.constraints.*;
 
 
@@ -10,23 +10,23 @@ import java.util.Objects;
 
 public class Framework   {
   
-  private ProgrammingLanguage language = null;
+  private Language language = null;
   private String name = null;
   private String description = null;
 
   /**
    **/
-  public Framework language(ProgrammingLanguage language) {
+  public Framework language(Language language) {
     this.language = language;
     return this;
   }
 
   
   @ApiModelProperty(value = "")
-  public ProgrammingLanguage getLanguage() {
+  public Language getLanguage() {
     return language;
   }
-  public void setLanguage(ProgrammingLanguage language) {
+  public void setLanguage(Language language) {
     this.language = language;
   }
 
