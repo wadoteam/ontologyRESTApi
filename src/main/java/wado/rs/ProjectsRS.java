@@ -25,7 +25,6 @@ public class ProjectsRS {
 		this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces("application/json")
