@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,7 +19,6 @@ import wado.model.Project;
 @Path("/projects")
 @Transactional
 public class ProjectsRS {
-	@PersistenceContext(unitName = "my-pu")
 	private EntityManager em;
 	@PostConstruct
 	public void init() {

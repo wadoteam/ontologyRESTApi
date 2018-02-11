@@ -1,27 +1,22 @@
 package io.swagger.sparql;
 
-import org.apache.jena.arq.querybuilder.SelectBuilder;
 import org.apache.jena.query.*;
 
+import java.util.List;
 import java.util.Map;
 
 abstract class SparqlRequest {
     abstract ResultSet get();
 
-    public ResultSet runQuery(SelectBuilder sb) {
+    public ResultSet runQuery(String queryRaw) {
 
-        Map<String, String> prefixes = Utils.getPrefixesMap();
-        for (Map.Entry<String, String> entry : prefixes.entrySet()) {
-            sb.addPrefix(entry.getKey(), entry.getValue());
-        }
-        sb.setLimit(100);
+        queryRaw = Utils.PREFIXES +  queryRaw;
 
-        Query query = QueryFactory.create(sb.buildString());
+        Query query = QueryFactory.create(queryRaw);
         QueryExecution qexec = QueryExecutionFactory.sparqlService(SparqlEndpoint.endpoint, query);
 
         ResultSet results = qexec.execSelect();
 
-        qexec.close();
         return results;
     }
 

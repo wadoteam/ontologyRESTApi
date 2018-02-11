@@ -4,31 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
-
-    public static Map<String, String> getPrefixesMap() {
-        Map<String, String> prefixes = new HashMap<>();
-        prefixes.put("dbo", "http://dbpedia.org/ontology/");
-        prefixes.put("dc", "http://purl.org/dc/elements/1.1/");
-        prefixes.put("foaf", "http://xmlns.com/foaf/0.1/");
-        prefixes.put("prov", "http://www.w3.org/ns/prov#");
-        prefixes.put("obo", "http://purl.obolibrary.org/obo/");
-        prefixes.put("dbr", "http://dbpedia.org/resource/");
-        prefixes.put("doap", "http://usefulinc.com/ns/doap#");
-        prefixes.put("efo", "http://www.ebi.ac.uk/efo/");
-        prefixes.put("edamontology", "http://edamontology.org#");
-        prefixes.put("swo", "http://www.ebi.ac.uk/swo/");
-        prefixes.put("skos", "http://www.w3.org/2004/02/skos/core#");
-        prefixes.put("oboInOwl", "http://www.geneontology.org/formats/oboInOwl#");
-        prefixes.put("edamontology1", "http://edamontology.org/");
-        prefixes.put("dbc", "http://dbpedia.org/resource/Category:");
-        prefixes.put("base", "http://webprotege.stanford.edu/project/BNheXqpQbFxGhfZ0oWHJp1");
-        prefixes.put("xsd", "http://www.w3.org/2001/XMLSchema#");
-        prefixes.put("owl", "http://www.w3.org/2002/07/owl#");
-        prefixes.put("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
-        prefixes.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-        prefixes.put("base2", "http://webprotege.stanford.edu/");
-        return prefixes;
-    }
+    public static final String PREFIXES = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+            "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+            "PREFIX base: <http://webprotege.stanford.edu/project/BNheXqpQbFxGhfZ0oWHJp1#>\n" +
+            "PREFIX dbc: <http://dbpedia.org/resource/Category:>\n" +
+            "PREFIX edamontology1: <http://edamontology.org/>\n" +
+            "PREFIX oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>\n" +
+            "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
+            "PREFIX swo: <http://www.ebi.ac.uk/swo/>\n" +
+            "PREFIX edamontology: <http://edamontology.org#>\n" +
+            "PREFIX efo: <http://www.ebi.ac.uk/efo/>\n" +
+            "PREFIX doap: <http://usefulinc.com/ns/doap#>\n" +
+            "PREFIX dbr: <http://dbpedia.org/resource/>\n" +
+            "PREFIX obo: <http://purl.obolibrary.org/obo/>\n" +
+            "PREFIX prov: <http://www.w3.org/ns/prov#>\n" +
+            "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+            "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+            "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
+            "PREFIX base2: <http://webprotege.stanford.edu/>\n";
 
     public static Map<String, String> getFeatureMap() {
         Map<String, String> feature = new HashMap<>();

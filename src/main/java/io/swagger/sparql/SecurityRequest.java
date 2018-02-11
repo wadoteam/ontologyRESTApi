@@ -21,7 +21,7 @@ public class SecurityRequest extends SparqlRequest{
                 .addOptional("?attack", "base2:hasAttackResult", "?atackResult")
                 .addOptional("?attack", "base2:useAttackTool", "?atackTooL");
 
-        return runQuery(sb);
+        return runQuery("");
 
     }
 
