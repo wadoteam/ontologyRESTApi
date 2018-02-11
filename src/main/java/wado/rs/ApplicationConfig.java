@@ -1,5 +1,7 @@
 package wado.rs;
 
+import wado.CORSResponseFilter;
+
 import java.util.Set;
 
 import javax.ws.rs.core.Application;
