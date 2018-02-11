@@ -39,12 +39,11 @@ public class UsersRS {
         return this.em.find(User.class, email);
     }
 
-    @SuppressWarnings("unchecked")
     @GET
     @Path("/{user}/projects")
     @Produces("application/json")
-    public List<Project> getProjectsByUser(@PathParam("user") String user) {
-        return this.em.createQuery("select p from Project p where user.id=?").setParameter(1, user).getResultList();
+    public List<Project> getProjectsByUser(@PathParam("user") Integer user) {
+        return this.em.createQuery("select p from Project p where p.user.id= :user", Project.class).setParameter("user", user).getResultList();
     }
 
     @POST
