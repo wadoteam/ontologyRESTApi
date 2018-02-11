@@ -23,10 +23,11 @@ public class RecomandationRequests extends SparqlRequest {
 
     public ResultSet get() {
         Map<String, String> classes = Utils.getFeatureMap();
-        String queryRaw = "select ?recomandation ?repo " +
+        String queryRaw = "select ?recomandation ?repo ?license " +
                 "where {\n" +
                 "?recomandation rdf:type base:Language . \n" +
                 "?recomandation base:hasRepository ?repo . \n" +
+                "?recomandation base:hasLicense ?license\n" +
                 "optional { \n" +
                 "?knownFeature rdfs:subClassOf ?parrentClass . \n"+
                 "?recomandation rdfs:subClassOf ?parrentClass\n"+
@@ -40,9 +41,10 @@ public class RecomandationRequests extends SparqlRequest {
         while (result.hasNext()) {
             QuerySolution row = result.next();
             Map<String, String> rowMap = new HashMap<>();
-            rowMap.put("recomandation", row.get("recomandation").toString());
-            rowMap.put("repo", row.get("repo").toString());
-
+            rowMap.put("recomandation", row.get("recomandation").asResource().getLocalName());
+            rowMap.put("repo", row.get("repo").asResource().getLocalName());
+            rowMap.put("license", row.get("license").asResource().getLocalName());
+            results.add(rowMap);
         }
         return results;
     }

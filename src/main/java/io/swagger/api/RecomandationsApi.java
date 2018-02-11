@@ -28,7 +28,7 @@ public class RecomandationsApi {
     public Response getRepositories(@PathParam("project") String project) {
 
         RecomandationRequests response = new RecomandationRequests(project);
-        response.toList();
-        return Response.ok().entity("").build();
+
+        return Response.ok().entity(response.toList()).build();
     }
 }
