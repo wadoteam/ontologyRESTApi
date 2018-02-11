@@ -10,7 +10,7 @@ import org.apache.jena.query.ResultSet;
 
 public class LanguageRequest extends SparqlRequest {
 	public List<Map<String, String>> getAllLanguages() {
-		String query = "SELECT ?entity " + "WHERE { ?entity rdf:type base:Language }";
+		String query = "SELECT ?language " + "WHERE { ?language rdf:type base:Language }";
 		return toList(runQuery(query));
 	}
 	
@@ -22,7 +22,7 @@ public class LanguageRequest extends SparqlRequest {
         while (rs.hasNext()) {
             QuerySolution row = rs.next();
             Map<String, String> rowMap = new HashMap<>();
-            rowMap.put("entity", row.get("entity").asResource().getLocalName());
+            rowMap.put("language", row.get("language").asResource().getLocalName());
             results.add(rowMap);
         }
         return results;

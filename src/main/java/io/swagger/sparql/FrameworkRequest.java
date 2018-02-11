@@ -11,7 +11,7 @@ import org.apache.jena.query.ResultSet;
 public class FrameworkRequest extends SparqlRequest {
 
 	public List<Map<String, String>> getAllFrameworks() {
-		String query = "SELECT ?entity  " + "WHERE { ?entity rdf:type base2:Framework }";
+		String query = "SELECT ?framework  " + "WHERE { ?framework rdf:type base2:Framework }";
 		return toList(runQuery(query));
 	}
 
@@ -21,7 +21,7 @@ public class FrameworkRequest extends SparqlRequest {
 		while (rs.hasNext()) {
 			QuerySolution row = rs.next();
 			Map<String, String> rowMap = new HashMap<>();
-			rowMap.put("entity", row.get("entity").asResource().getLocalName());
+			rowMap.put("framework", row.get("framework").asResource().getLocalName());
 			results.add(rowMap);
 		}
 		return results;
