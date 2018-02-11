@@ -1,8 +1,5 @@
 package io.swagger.model;
 
-import io.swagger.model.Language;
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.constraints.*;
 
 
@@ -10,21 +7,20 @@ import io.swagger.annotations.*;
 import java.util.Objects;
 
 
-public class DevelopmentEnvironment   {
+public class Language   {
   
   private String name = null;
-  private List<Language> languages = new ArrayList<Language>();
   private String description = null;
 
   /**
    **/
-  public DevelopmentEnvironment name(String name) {
+  public Language name(String name) {
     this.name = name;
     return this;
   }
 
   
-  @ApiModelProperty(example = "Awesome DevEnv", required = true, value = "")
+  @ApiModelProperty(example = "Java", required = true, value = "")
   @NotNull
   public String getName() {
     return name;
@@ -35,23 +31,7 @@ public class DevelopmentEnvironment   {
 
   /**
    **/
-  public DevelopmentEnvironment languages(List<Language> languages) {
-    this.languages = languages;
-    return this;
-  }
-
-  
-  @ApiModelProperty(value = "")
-  public List<Language> getLanguages() {
-    return languages;
-  }
-  public void setLanguages(List<Language> languages) {
-    this.languages = languages;
-  }
-
-  /**
-   **/
-  public DevelopmentEnvironment description(String description) {
+  public Language description(String description) {
     this.description = description;
     return this;
   }
@@ -74,24 +54,22 @@ public class DevelopmentEnvironment   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DevelopmentEnvironment developmentEnvironment = (DevelopmentEnvironment) o;
-    return Objects.equals(name, developmentEnvironment.name) &&
-        Objects.equals(languages, developmentEnvironment.languages) &&
-        Objects.equals(description, developmentEnvironment.description);
+    Language programmingLanguage = (Language) o;
+    return Objects.equals(name, programmingLanguage.name) &&
+        Objects.equals(description, programmingLanguage.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, languages, description);
+    return Objects.hash(name, description);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DevelopmentEnvironment {\n");
+    sb.append("class ProgrammingLanguage {\n");
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    languages: ").append(toIndentedString(languages)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
