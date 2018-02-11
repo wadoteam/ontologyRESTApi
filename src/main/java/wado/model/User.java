@@ -3,43 +3,41 @@ package wado.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @SuppressWarnings("serial")
-@Table(name="users")
+@Table(name = "users")
 @Entity
-public class User implements Serializable{
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 
-	@Id
-	private String email;
-	
-	@Column
-	private String password;
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Project> projects;
+    @Column
+    private String email;
 
-	public String getEmail() {
-		return email;
-	}
+    @Column
+    private String password;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 /*	public Set<Project> getProjects() {
 		return projects;

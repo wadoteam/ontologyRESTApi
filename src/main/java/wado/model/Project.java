@@ -1,51 +1,50 @@
 package wado.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @SuppressWarnings("serial")
-@Table(name="projects")
+@Table(name = "projects")
 @Entity
-public class Project implements Serializable{
+public class Project implements Serializable {
 
-	@Id
-	@Column(name="project_id")
-	private Integer projectId;
-	
-	@Column
-	private String title;
-	
-	@ManyToOne
-	@JoinColumn(name = "email", referencedColumnName = "email", nullable = false)
-	private User user;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 
-	public Integer getProjectId() {
-		return projectId;
-	}
+    @Column
+    private String title;
 
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
-	}
+    @OneToMany(targetEntity = Characteristic.class, mappedBy = "project")
+    private List<Characteristic> characteristics;
 
-	public String getTitle() {
-		return title;
-	}
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setId(Integer projectId) {
+        this.id = projectId;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

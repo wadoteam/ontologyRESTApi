@@ -80,22 +80,12 @@
             <version>${jackson-jaxrs-version}</version>
             <scope>compile</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.9-rc</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.apache.jena/jena-querybuilder -->
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-querybuilder</artifactId>
             <version>2.13.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -114,14 +104,11 @@
             <artifactId>jena-text</artifactId>
             <version>${jena.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.hp.hpl.jena/jena -->
         <dependency>
             <groupId>com.hp.hpl.jena</groupId>
             <artifactId>jena</artifactId>
             <version>2.6.4</version>
         </dependency>
-
 
         <dependency>
             <groupId>net.rootdev</groupId>
@@ -148,14 +135,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.1</version>
         </dependency>
-
-
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate</groupId>

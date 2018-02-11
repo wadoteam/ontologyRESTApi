@@ -2,7 +2,9 @@ package wado.rs;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -20,6 +22,11 @@ import wado.model.Project;
 public class ProjectsRS {
 	@PersistenceContext(unitName = "my-pu")
 	private EntityManager em;
+	@PostConstruct
+	public void init() {
+		this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+	}
+
 
 	@SuppressWarnings("unchecked")
 	@GET
@@ -39,7 +46,7 @@ public class ProjectsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Project saveProject(Project project) {
-		if (this.getProjectById(project.getProjectId()) != null) {
+		if (this.getProjectById(project.getId()) != null) {
 			this.em.merge(project);
 		} else {
 			this.em.persist(project);
