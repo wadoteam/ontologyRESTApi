@@ -12,6 +12,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Path("/{project}/recomandation")
 
@@ -28,7 +31,9 @@ public class RecomandationsApi {
     public Response getRepositories(@PathParam("project") String project) {
 
         RecomandationRequests response = new RecomandationRequests(project);
-
-        return Response.ok().entity(response.toList()).build();
+        Map<String, List<List<Object>>> allData = new HashMap<>();
+        allData.put("Language", response.toList("language"));
+        allData.put("Framework", response.toList("framework"));
+        return Response.ok().entity(allData).build();
     }
 }

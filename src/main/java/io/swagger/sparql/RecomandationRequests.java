@@ -22,45 +22,45 @@ public class RecomandationRequests extends SparqlRequest {
         this.classToBeRecomadate = c;
     }
 
-    public ResultSet get() {
+    public ResultSet get(String key) {
         Map<String, String> classes = Utils.getFeatureMap();
         String queryRaw = "select ?recomandation ?repo ?license " +
                 "where {\n" +
-                "?recomandation rdf:type base:Language . \n" +
+                "?recomandation rdf:type " + classes.get(key) + " . \n" +
                 "?recomandation base:hasRepository ?repo . \n" +
                 "?recomandation base:hasLicense ?license\n" +
                 "optional { \n" +
-                "?knownFeature rdfs:subClassOf ?parrentClass . \n"+
-                "?recomandation base:hasDescription ?description . \n"+
-                "?recomandation rdfs:subClassOf ?parrentClass\n"+
+                "?knownFeature rdfs:subClassOf ?parrentClass . \n" +
+                "?recomandation base:hasDescription ?description . \n" +
+                "?recomandation rdfs:subClassOf ?parrentClass\n" +
                 "}}";
         return runQuery(queryRaw);
     }
 
-    public List<List<Object>> toList() {
+    public List<List<Object>> toList(String key) {
         List<Recomandation> results = new ArrayList<>();
-        ResultSet result = this.get();
+        ResultSet result = this.get(key);
         while (result.hasNext()) {
             QuerySolution row = result.next();
             boolean find = false;
-            for(int i = 0; i<results.size(); i++) {
-                if(results.get(i).recomandationName.equals(row.get("recomandation").asResource().getLocalName())) {
+            for (int i = 0; i < results.size(); i++) {
+                if (results.get(i).recomandationName.equals(row.get("recomandation").asResource().getLocalName())) {
                     results.get(i).repo.add(row.get("repo").asResource().getLocalName());
                     find = true;
                     break;
                 }
             }
-            if(!find) {
+            if (!find) {
                 Recomandation rowMap = new Recomandation();
                 rowMap.recomandationName = row.get("recomandation").asResource().getLocalName();
-                rowMap.license =  row.get("license").asResource().getLocalName();
-                rowMap.description =  row.get("description") !=null ? row.get("description").asResource().getLocalName():"";
-                rowMap.repo.add( row.get("repo").asResource().getLocalName());
+                rowMap.license = row.get("license").asResource().getLocalName();
+                rowMap.description = row.get("description") != null ? row.get("description").asResource().getLocalName() : "";
+                rowMap.repo.add(row.get("repo").asResource().getLocalName());
                 results.add(rowMap);
             }
         }
         List<List<Object>> r = new ArrayList<>();
-        for(int i = 0 ; i < results.size(); i++){
+        for (int i = 0; i < results.size(); i++) {
             List<Object> a = new ArrayList<>();
             a.add(results.get(i).recomandationName);
             a.add(results.get(i).description);
