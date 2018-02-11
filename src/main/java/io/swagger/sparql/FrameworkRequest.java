@@ -16,7 +16,8 @@ public class FrameworkRequest extends SparqlRequest {
 	}
 	
 	public List<Map<String, String>> getFrameworksByLanguage(String language) {
-		String query = "SELECT ?framework  " + "WHERE { ?framework rdf:type base2:Framework }";
+		String query = "SELECT ?framework ?language " + "WHERE { ?framework rdf:type base2:Framework."
+				+ " ?framework base:isForLanguage ?language }";
 		return toList(runQuery(query));
 	}
 

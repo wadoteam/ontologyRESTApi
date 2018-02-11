@@ -44,7 +44,7 @@ public class UsersRS {
     @Path("/{user}/projects")
     @Produces("application/json")
     public List<Project> getProjectsByUser(@PathParam("user") String user) {
-        return this.em.createQuery("select p from Project p where id=?").setParameter(1, user).getResultList();
+        return this.em.createQuery("select p from Project p where p.user.email=?").setParameter(1, user).getResultList();
     }
 
     @POST
