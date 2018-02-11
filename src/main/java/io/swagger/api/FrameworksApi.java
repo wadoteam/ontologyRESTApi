@@ -30,17 +30,11 @@ public class FrameworksApi  {
     @ApiOperation(value = "Get frameworks", notes = "Get a list of available frameworks", response = Framework.class, responseContainer = "List", tags={ "concepts" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
-    public Response getFrameworks() {
+    public Response getFrameworks(@QueryParam("language")String language) {
+    	if(language != null){
+            return Response.ok().entity(request.getFrameworksByLanguage(language)).build();
+    	}
         return Response.ok().entity(request.getAllFrameworks()).build();
     }
-
-    /*@GET
-    @Produces({ "application/json" })
-    @ApiOperation(value = "Get frameworks", notes = "Get a list of available frameworks", response = Framework.class, responseContainer = "List", tags={ "concepts" })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
-    public Response getFrameworksByLanguage(@QueryParam("language")String language) {
-        return Response.ok().entity(request.getFrameworksByLanguage(language)).build();
-    }*/
 }
 

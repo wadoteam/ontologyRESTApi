@@ -17,6 +17,9 @@ public class Project implements Serializable {
     @Column
     private String title;
 
+    @Column
+    private String description;
+
     @OneToMany(targetEntity = Characteristic.class, mappedBy = "project")
     private List<Characteristic> characteristics;
 
@@ -46,5 +49,13 @@ public class Project implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
