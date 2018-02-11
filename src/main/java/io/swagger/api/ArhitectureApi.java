@@ -29,9 +29,7 @@ public class ArhitectureApi {
     public Response getRepositories(@PathParam("project") String project) {
 
         ArchitecturalPatternRequest response = new ArchitecturalPatternRequest();
-        System.out.println(response.toString());
 
-
-        return Response.ok().entity("magic!").build();
+        return Response.ok().entity(response.toList()).build();
     }
 }
