@@ -34,13 +34,13 @@ public class FrameworksApi  {
         return Response.ok().entity(request.getAllFrameworks()).build();
     }
 
-    @GET()
+    /*@GET
     @Produces({ "application/json" })
     @ApiOperation(value = "Get frameworks", notes = "Get a list of available frameworks", response = Framework.class, responseContainer = "List", tags={ "concepts" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Framework.class, responseContainer = "List") })
     public Response getFrameworksByLanguage(@QueryParam("language")String language) {
         return Response.ok().entity(request.getFrameworksByLanguage(language)).build();
-    }
+    }*/
 }
 
