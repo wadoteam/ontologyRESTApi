@@ -13,17 +13,19 @@ public class EMF implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        emf = Persistence.createEntityManagerFactory("my-pu");
+        if (emf != null)
+            emf = Persistence.createEntityManagerFactory("my-pu");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        emf.close();
+        if (emf != null)
+            emf.close();
     }
 
     public static EntityManager createEntityManager() {
         if (emf == null) {
-            throw new IllegalStateException("Context is not initialized yet.");
+            emf = Persistence.createEntityManagerFactory("my-pu");
         }
 
         return emf.createEntityManager();
