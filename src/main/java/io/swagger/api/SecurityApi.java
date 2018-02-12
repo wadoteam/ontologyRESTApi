@@ -27,10 +27,6 @@ public class SecurityApi {
             @ApiResponse(code = 200, message = "successful operation", response = Repository.class, responseContainer = "List")})
     public Response getRepositories(@PathParam("project") String project) {
 
-        SecurityRequest response = new SecurityRequest();
-        System.out.println(response.toString());
-
-
         return Response.ok().entity("magic!").build();
     }
 }
