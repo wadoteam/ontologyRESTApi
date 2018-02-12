@@ -44,8 +44,10 @@ public class ProjectsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Project saveProject(Project project) {
+		this.em.getTransaction().begin();
 		this.em.persist(project);
 		this.em.flush();
+		this.em.getTransaction().commit();
 		return project;
 	}
 
