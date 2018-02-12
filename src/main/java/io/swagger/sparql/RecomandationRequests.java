@@ -43,6 +43,7 @@ public class RecomandationRequests extends SparqlRequest {
         while (result.hasNext()) {
             QuerySolution row = result.next();
             boolean find = false;
+            try{
             for (int i = 0; i < results.size(); i++) {
                 if (results.get(i).recomandationName.equals(row.get("recomandation").asResource().getLocalName())) {
                     results.get(i).repo.add(row.get("repo").asResource().getLocalName());
@@ -57,6 +58,8 @@ public class RecomandationRequests extends SparqlRequest {
                 rowMap.description = row.get("description") != null ? row.get("description").asResource().getLocalName() : "";
                 rowMap.repo.add(row.get("repo").asResource().getLocalName());
                 results.add(rowMap);
+            }}catch (Exception e) {
+                continue;
             }
         }
         List<List<Object>> r = new ArrayList<>();
