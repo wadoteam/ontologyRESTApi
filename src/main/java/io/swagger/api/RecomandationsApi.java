@@ -1,20 +1,25 @@
 package io.swagger.api;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.model.Repository;
 import io.swagger.sparql.RecomandationRequests;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import wado.model.Characteristic;
 
 @Path("/{project}/recomandation")
 
@@ -23,13 +28,26 @@ import java.util.Map;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2018-01-31T23:29:20.245Z")
 
 public class RecomandationsApi {
+
+    private EntityManager em;
+
+    @PostConstruct
+    public void init() {
+        this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+    }
+    
     @GET
     @Produces({"application/json"})
     @ApiOperation(value = "Get recomandation for a project", notes = "Get recomandation", response = Repository.class, responseContainer = "List", tags = {"repository"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = Repository.class, responseContainer = "List")})
     public Response getRepositories(@PathParam("project") String project) {
-
+    	List<Characteristic> characteristics = this.em.createQuery("select c from Characteristic c where c.project.id = :id").setParameter("id", project).getResultList();
+    	Map<String, String> properties = new HashMap<String, String>();
+    	for(Characteristic c : characteristics){
+    		properties.put(c.getCharacteristicType(), c.getCharacteristicValue());
+    	}
+    	
         RecomandationRequests response = new RecomandationRequests(project);
         Map<String, List<List<Object>>> allData = new HashMap<>();
         allData.put("Language", response.toList("language"));
