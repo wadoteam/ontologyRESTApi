@@ -30,7 +30,6 @@ public class RecomandationRequests extends SparqlRequest {
                 "?recomandation base:hasRepository ?repo . \n" +
                 "?recomandation base:hasLicense ?license\n" +
                 "optional { \n" +
-                 knowProperty + " rdfs:subClassOf ?parrentClass . \n" +
                 "?recomandation base:hasDescription ?description . \n" +
                 "?recomandation rdfs:subClassOf ?parrentClass\n" +
                 "}} limit 10";
