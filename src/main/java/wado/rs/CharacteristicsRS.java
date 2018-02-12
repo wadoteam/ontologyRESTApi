@@ -19,9 +19,9 @@ import wado.model.Characteristic;
 @Path("/characteristics")
 @Transactional
 public class CharacteristicsRS {
-	
+
 	private EntityManager em;
-	
+
 	@PostConstruct
 	public void init() {
 		this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
@@ -45,17 +45,14 @@ public class CharacteristicsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Characteristic saveCharacteristic(Characteristic characteristic) {
-		if (this.getCharacteristicById(characteristic.getId()) != null) {
-			this.em.merge(characteristic);
-		} else {
-			this.em.persist(characteristic);
-		}
+
+		this.em.persist(characteristic);
 		return characteristic;
 	}
-	
+
 	@DELETE
 	@Path("/{id}")
-	public void deleteCharacteristic(@PathParam("id")Integer id){
+	public void deleteCharacteristic(@PathParam("id") Integer id) {
 		this.em.remove(this.getCharacteristicById(id));
 	}
 }
