@@ -40,11 +40,14 @@ public class ProjectsRS {
     @Consumes("application/json")
     @Produces("application/json")
     public Project saveProject(Project project) {
-        EMF.createEntityManager().getTransaction().begin();
-        EMF.createEntityManager().persist(project);
-        EMF.createEntityManager().flush();
-        EMF.createEntityManager().getTransaction().commit();
-        EMF.createEntityManager().close();
+        EntityManager em = EMF.createEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(project);
+        em.flush();
+        em.getTransaction().commit();
+        em.close();
+
         return project;
     }
 
