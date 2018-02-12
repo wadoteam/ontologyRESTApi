@@ -22,7 +22,7 @@ public class RecomandationRequests extends SparqlRequest {
         this.classToBeRecomadate = c;
     }
 
-    public ResultSet get(String key) {
+    public ResultSet get(String key, String knowProperty) {
         Map<String, String> classes = Utils.getFeatureMap();
         String queryRaw = "select ?recomandation ?repo ?license " +
                 "where {\n" +
@@ -30,16 +30,16 @@ public class RecomandationRequests extends SparqlRequest {
                 "?recomandation base:hasRepository ?repo . \n" +
                 "?recomandation base:hasLicense ?license\n" +
                 "optional { \n" +
-                "?knownFeature rdfs:subClassOf ?parrentClass . \n" +
+                 knowProperty + " rdfs:subClassOf ?parrentClass . \n" +
                 "?recomandation base:hasDescription ?description . \n" +
                 "?recomandation rdfs:subClassOf ?parrentClass\n" +
                 "}}";
         return runQuery(queryRaw);
     }
 
-    public List<List<Object>> toList(String key) {
+    public List<List<Object>> toList(String key, String knownProperty) {
         List<Recomandation> results = new ArrayList<>();
-        ResultSet result = this.get(key);
+        ResultSet result = this.get(key, knownProperty);
         while (result.hasNext()) {
             QuerySolution row = result.next();
             boolean find = false;

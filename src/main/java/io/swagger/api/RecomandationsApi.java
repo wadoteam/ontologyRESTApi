@@ -47,12 +47,18 @@ public class RecomandationsApi {
     	for(Characteristic c : characteristics){
     		properties.put(c.getCharacteristicType(), c.getCharacteristicValue());
     	}
-    	
+
+    	String language = "base:" + properties.getOrDefault("language", "");
+    	String framework = "base2:" + properties.getOrDefault("framework", "");
+    	String database = "base2:" + properties.getOrDefault("database", "");
+    	String ide = "base2:" + properties.getOrDefault("ide", "");
+
         RecomandationRequests response = new RecomandationRequests(project);
         Map<String, List<List<Object>>> allData = new HashMap<>();
-        allData.put("Language", response.toList("language"));
-        allData.put("Framework", response.toList("framework"));
-        allData.put("Database", response.toList("database"));
+        allData.put("Language", response.toList("language", language));
+        allData.put("Framework", response.toList("framework", framework));
+        allData.put("Database", response.toList("database", database));
+        allData.put("IDE", response.toList("IDE", ide));
         return Response.ok().entity(allData).build();
     }
 }

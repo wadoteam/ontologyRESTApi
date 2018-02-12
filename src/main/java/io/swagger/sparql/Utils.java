@@ -30,6 +30,7 @@ public class Utils {
         feature.put("language", "base:Language");
         feature.put("framework", "base2:Framework");
         feature.put("database", "base2:Database");
+        feature.put("ide", "base2:IntegratedDevelopmentEnvironment");
         return feature;
     }
 }
