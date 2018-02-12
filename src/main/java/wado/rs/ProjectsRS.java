@@ -48,6 +48,7 @@ public class ProjectsRS {
 		this.em.persist(project);
 		this.em.flush();
 		this.em.getTransaction().commit();
+		this.em.close();
 		return project;
 	}
 

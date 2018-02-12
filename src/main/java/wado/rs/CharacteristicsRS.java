@@ -49,6 +49,7 @@ public class CharacteristicsRS {
 		this.em.persist(characteristic);
 		this.em.flush();
 		this.em.getTransaction().commit();
+		this.em.close();
 		return characteristic;
 	}
 
