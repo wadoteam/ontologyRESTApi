@@ -58,7 +58,7 @@ public class RecomandationsApi {
         allData.put("Language", response.toList("language", language));
         allData.put("Framework", response.toList("framework", framework));
         allData.put("Database", response.toList("database", database));
-        allData.put("IDE", response.toList("IDE", ide));
+        allData.put("IDE", response.toList("ide", ide));
         return Response.ok().entity(allData).build();
     }
 }
