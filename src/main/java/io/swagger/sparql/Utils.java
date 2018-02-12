@@ -28,9 +28,9 @@ public class Utils {
     public static Map<String, String> getFeatureMap() {
         Map<String, String> feature = new HashMap<>();
         feature.put("language", "base:Language");
-        feature.put("framework", "base2:Framework");
-        feature.put("database", "base2:Database");
-        feature.put("ide", "base2:IntegratedDevelopmentEnvironment");
+        feature.put("framework", "base:Framework");
+        feature.put("database", "base:Database");
+        feature.put("ide", "base:IntegratedDevelopmentEnvironment");
         return feature;
     }
 }

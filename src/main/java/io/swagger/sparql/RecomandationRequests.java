@@ -24,14 +24,14 @@ public class RecomandationRequests extends SparqlRequest {
 
     public ResultSet get(String key, String knowProperty) {
         Map<String, String> classes = Utils.getFeatureMap();
-        String queryRaw = "select ?recomandation ?repo ?license " +
-                "where {\n" +
-                "?recomandation rdf:type base:Language . \n" +
-                "?recomandation base:hasRepository ?repo . \n" +
-                "?recomandation base:hasLicense ?license\n" +
-                "optional { \n" +
-                "?recomandation base:hasDescription ?description . \n" +
-                "?recomandation rdfs:subClassOf ?parrentClass\n" +
+        String queryRaw = "select distinct ?repo ?link ?license ?description\n"+
+                "where {\n"+
+                classes.get(key)+" base:hasRepository ?repo .\n"+
+  				"?repo base:hasLink ?link .\n"+
+                "?repo base:hasLicense ?license\n"+
+                "optional { \n"+
+                "?recomandation base:hasDescription ?description .\n"+
+                "?recomandation rdfs:subClassOf ?parrentClass\n"+
                 "}} limit 10";
         return runQuery(queryRaw);
     }
@@ -44,18 +44,18 @@ public class RecomandationRequests extends SparqlRequest {
             boolean find = false;
             try{
             for (int i = 0; i < results.size(); i++) {
-                if (results.get(i).recomandationName.equals(row.get("recomandation").asResource().getLocalName())) {
-                    results.get(i).repo.add(row.get("repo").asResource().getLocalName());
+                if (results.get(i).recomandationName.equals(row.get("repo").asResource().getLocalName())) {
+                    results.get(i).repo.add(row.get("link").asLiteral().toString());
                     find = true;
                     break;
                 }
             }
             if (!find) {
                 Recomandation rowMap = new Recomandation();
-                rowMap.recomandationName = row.get("recomandation").asResource().getLocalName();
+                rowMap.recomandationName = row.get("repo").asResource().getLocalName();
                 rowMap.license = row.get("license").asResource().getLocalName();
                 rowMap.description = row.get("description") != null ? row.get("description").asResource().getLocalName() : "";
-                rowMap.repo.add(row.get("repo").asResource().getLocalName());
+                rowMap.repo.add(row.get("link").asLiteral().toString());
                 results.add(rowMap);
             }}catch (Exception e) {
                 continue;
