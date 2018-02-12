@@ -9,16 +9,7 @@ public class IssuesRequest extends SparqlRequest {
         this.repo = repo;
     }
     public ResultSet get() {
-        String sparqlQuery = "select distinct ?language ?a where {\n" +
-                "  ?language rdf:type base:Language.\n" +
-                "}";
-
-        Query query = QueryFactory.create(sparqlQuery);
-        QueryExecution qexec = QueryExecutionFactory.sparqlService(SparqlEndpoint.endpoint, query);
-
-        ResultSet results = qexec.execSelect();
-
-        qexec.close();
-        return results;
+    
+        return null;
     }
 }
