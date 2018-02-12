@@ -29,7 +29,7 @@ public class Utils {
         Map<String, String> feature = new HashMap<>();
         feature.put("language", "base:Language");
         feature.put("framework", "base2:Framework");
-        feature.put("ide", "base:IntegratedDevelopmentEnvironment");
+        feature.put("database", "base2:Database");
         return feature;
     }
 }

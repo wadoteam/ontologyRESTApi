@@ -34,6 +34,7 @@ public class RecomandationsApi {
         Map<String, List<List<Object>>> allData = new HashMap<>();
         allData.put("Language", response.toList("language"));
         allData.put("Framework", response.toList("framework"));
+        allData.put("Database", response.toList("database"));
         return Response.ok().entity(allData).build();
     }
 }
