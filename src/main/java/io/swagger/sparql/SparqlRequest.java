@@ -7,19 +7,20 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 
 abstract class SparqlRequest {
-	public ResultSet runQuery(String queryRaw) {
-		try {
-		queryRaw = Utils.PREFIXES + queryRaw;
+    public ResultSet runQuery(String queryRaw) {
+        ResultSet results;
+        try {
+            queryRaw = Utils.PREFIXES + queryRaw;
 
-		Query query = QueryFactory.create(queryRaw);
-		QueryExecution qexec = QueryExecutionFactory.sparqlService(SparqlEndpoint.endpoint, query);
+            Query query = QueryFactory.create(queryRaw);
+            QueryExecution qexec = QueryExecutionFactory.sparqlService(SparqlEndpoint.endpoint, query);
 
-		ResultSet results = qexec.execSelect();
-	}catch(Exception e) {
-		return new ResultSet();
-	}
+            results = qexec.execSelect();
+        } catch (Exception e) {
+            return null;
+        }
 
-		return results;
-	}
+        return results;
+    }
 
 }
