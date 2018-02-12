@@ -22,36 +22,51 @@ public class UsersRS {
 
     @PostConstruct
     public void init() {
-        if (this.em == null)
-            this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
     }
 
     @SuppressWarnings("unchecked")
     @GET
     @Produces("application/json")
     public List<User> getUsers() {
-        return this.em.createQuery("select u from User u").getResultList();
+        try {
+            return this.em.createQuery("select u from User u").getResultList();
+        } finally {
+            this.em.close();
+        }
     }
 
     @GET
     @Path("/{email}")
     @Produces("application/json")
     public User getUserByEmail(@PathParam("email") String email) {
-        return this.em.find(User.class, email);
+        try {
+            return this.em.find(User.class, email);
+        } finally {
+            this.em.close();
+        }
     }
 
     @GET
     @Path("/{user}/projects")
     @Produces("application/json")
     public List<Project> getProjectsByUser(@PathParam("user") Integer user) {
-        return this.em.createQuery("select p from Project p where p.user.id= :user", Project.class).setParameter("user", user).getResultList();
+        try {
+            return this.em.createQuery("select p from Project p where p.user.id= :user", Project.class).setParameter("user", user).getResultList();
+        } finally {
+            this.em.close();
+        }
     }
 
     @POST
     @Consumes("application/json")
     @Produces("application/json")
     public User addUser(User user) {
-        this.em.persist(user);
+        try {
+            this.em.persist(user);
+        } finally {
+            this.em.close();
+        }
         return user;
     }
 
