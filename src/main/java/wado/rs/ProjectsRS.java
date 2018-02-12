@@ -20,6 +20,7 @@ import wado.model.Project;
 @Transactional
 public class ProjectsRS {
 	private EntityManager em;
+
 	@PostConstruct
 	public void init() {
 		this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
@@ -43,17 +44,13 @@ public class ProjectsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Project saveProject(Project project) {
-		if (this.getProjectById(project.getId()) != null) {
-			this.em.merge(project);
-		} else {
-			this.em.persist(project);
-		}
+		this.em.persist(project);
 		return project;
 	}
-	
+
 	@DELETE
 	@Path("/{id}")
-	public void deleteProject(@PathParam("id")Integer id){
+	public void deleteProject(@PathParam("id") Integer id) {
 		this.em.remove(this.getProjectById(id));
 	}
 }
