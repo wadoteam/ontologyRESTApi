@@ -26,7 +26,7 @@ public class RecomandationRequests extends SparqlRequest {
         Map<String, String> classes = Utils.getFeatureMap();
         String queryRaw = "select ?recomandation ?repo ?license " +
                 "where {\n" +
-                "?recomandation rdf:type " + classes.get(key) + " . \n" +
+                "?recomandation rdf:type base:Language . \n" +
                 "?recomandation base:hasRepository ?repo . \n" +
                 "?recomandation base:hasLicense ?license\n" +
                 "optional { \n" +
