@@ -23,22 +23,29 @@ public class ProjectsRS {
 
     @PostConstruct
     public void init() {
-        if (this.em == null)
-            this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
     }
 
     @SuppressWarnings("unchecked")
     @GET
     @Produces("application/json")
     public List<Project> getProjects() {
-        return this.em.createQuery("select p from Project p").getResultList();
+        try {
+            return this.em.createQuery("select p from Project p").getResultList();
+        } finally {
+            this.em.close();
+        }
     }
 
     @GET
     @Path("/{id}")
     @Produces("application/json")
     public Project getProjectById(@PathParam("id") Integer projectId) {
-        return this.em.find(Project.class, projectId);
+        try {
+            return this.em.find(Project.class, projectId);
+        } finally {
+            this.em.close();
+        }
     }
 
     @POST
@@ -56,6 +63,10 @@ public class ProjectsRS {
     @DELETE
     @Path("/{id}")
     public void deleteProject(@PathParam("id") Integer id) {
-        this.em.remove(this.getProjectById(id));
+        try {
+            this.em.remove(this.getProjectById(id));
+        } finally {
+            this.em.close();
+        }
     }
 }

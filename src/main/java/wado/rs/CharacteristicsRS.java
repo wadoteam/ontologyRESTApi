@@ -24,22 +24,29 @@ public class CharacteristicsRS {
 
     @PostConstruct
     public void init() {
-        if (this.em == null)
-            this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
     }
 
     @SuppressWarnings("unchecked")
     @GET
     @Produces("application/json")
     public List<Characteristic> getCharacteristics() {
-        return this.em.createQuery("select c from Characteristic c").getResultList();
+        try {
+            return this.em.createQuery("select c from Characteristic c").getResultList();
+        } finally {
+            this.em.close();
+        }
     }
 
     @GET
     @Path("/{id}")
     @Produces("application/json")
     public Characteristic getCharacteristicById(@PathParam("id") Integer characteristicId) {
-        return this.em.find(Characteristic.class, characteristicId);
+        try {
+            return this.em.find(Characteristic.class, characteristicId);
+        } finally {
+            this.em.close();
+        }
     }
 
     @POST
@@ -57,6 +64,10 @@ public class CharacteristicsRS {
     @DELETE
     @Path("/{id}")
     public void deleteCharacteristic(@PathParam("id") Integer id) {
-        this.em.remove(this.getCharacteristicById(id));
+        try {
+            this.em.remove(this.getCharacteristicById(id));
+        } finally {
+            this.em.close();
+        }
     }
 }
