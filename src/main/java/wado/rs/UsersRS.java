@@ -22,7 +22,8 @@ public class UsersRS {
 
     @PostConstruct
     public void init() {
-        this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+        if (this.em == null)
+            this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
     }
 
     @SuppressWarnings("unchecked")
