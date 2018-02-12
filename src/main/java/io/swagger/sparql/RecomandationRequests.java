@@ -28,7 +28,8 @@ public class RecomandationRequests extends SparqlRequest {
                 "where {\n"+
                 classes.get(key)+" base:hasRepository ?repo .\n"+
   				"?repo base:hasLink ?link .\n"+
-                "?repo base:hasLicense ?license\n"+
+                "?repo base:hasLicense ?license .\n"+
+                "?repo base:hasDescription ?description \n"
                 "optional { \n"+
                 "?recomandation base:hasDescription ?description .\n"+
                 "?recomandation rdfs:subClassOf ?parrentClass\n"+
@@ -54,7 +55,7 @@ public class RecomandationRequests extends SparqlRequest {
                 Recomandation rowMap = new Recomandation();
                 rowMap.recomandationName = row.get("repo").asResource().getLocalName();
                 rowMap.license = row.get("license").asResource().getLocalName();
-                rowMap.description = row.get("description") != null ? row.get("description").asResource().getLocalName() : "";
+                rowMap.description = row.get("description") != null ? row.get("description").asLiteral().toString() : "";
                 rowMap.repo.add(row.get("link").asLiteral().toString());
                 results.add(rowMap);
             }}catch (Exception e) {
