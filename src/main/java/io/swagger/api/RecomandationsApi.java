@@ -41,7 +41,7 @@ public class RecomandationsApi {
     @ApiOperation(value = "Get recomandation for a project", notes = "Get recomandation", response = Repository.class, responseContainer = "List", tags = {"repository"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = Repository.class, responseContainer = "List")})
-    public Response getRepositories(@PathParam("project") String project) {
+    public Response getRepositories(@PathParam("project") Integer project) {
     	List<Characteristic> characteristics = this.em.createQuery("select c from Characteristic c where c.project.id = :id").setParameter("id", project).getResultList();
     	Map<String, String> properties = new HashMap<String, String>();
     	for(Characteristic c : characteristics){

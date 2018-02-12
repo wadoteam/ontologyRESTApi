@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class RecomandationRequests extends SparqlRequest {
 
-    private String classToBeRecomadate;
+    private Integer classToBeRecomadate;
 
-    public RecomandationRequests(String c) {
+    public RecomandationRequests(Integer c) {
         this.classToBeRecomadate = c;
     }
 
