@@ -45,7 +45,10 @@ public class CharacteristicsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Characteristic saveCharacteristic(Characteristic characteristic) {
+		this.em.getTransaction().begin();
 		this.em.persist(characteristic);
+		this.em.flush();
+		this.em.getTransaction().commit();
 		return characteristic;
 	}
 
