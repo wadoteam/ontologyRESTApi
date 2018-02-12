@@ -45,7 +45,6 @@ public class CharacteristicsRS {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Characteristic saveCharacteristic(Characteristic characteristic) {
-
 		this.em.persist(characteristic);
 		return characteristic;
 	}
