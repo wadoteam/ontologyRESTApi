@@ -29,7 +29,6 @@ public class RecomandationRequests extends SparqlRequest {
                 classes.get(key)+" base:hasRepository ?repo .\n"+
   				"?repo base:hasLink ?link .\n"+
                 "?repo base:hasLicense ?license .\n"+
-                "?repo base:hasDescription ?description \n"
                 "optional { \n"+
                 "?recomandation base:hasDescription ?description .\n"+
                 "?recomandation rdfs:subClassOf ?parrentClass\n"+
