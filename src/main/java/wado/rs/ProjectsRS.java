@@ -45,6 +45,7 @@ public class ProjectsRS {
 	@Produces("application/json")
 	public Project saveProject(Project project) {
 		this.em.persist(project);
+		this.em.flush();
 		return project;
 	}
 
