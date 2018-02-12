@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -21,9 +22,12 @@ import wado.model.Project;
 public class ProjectsRS {
     private EntityManager em;
 
+    private EntityManagerFactory emf;
+
     @PostConstruct
     public void init() {
-        this.em = Persistence.createEntityManagerFactory("my-pu").createEntityManager();
+        this.emf = Persistence.createEntityManagerFactory("my-pu");
+        this.em = emf.createEntityManager();
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +38,7 @@ public class ProjectsRS {
             return this.em.createQuery("select p from Project p").getResultList();
         } finally {
             this.em.close();
+            emf.close();
         }
     }
 
@@ -45,6 +50,7 @@ public class ProjectsRS {
             return this.em.find(Project.class, projectId);
         } finally {
             this.em.close();
+            emf.close();
         }
     }
 
@@ -57,6 +63,7 @@ public class ProjectsRS {
         this.em.flush();
         this.em.getTransaction().commit();
         this.em.close();
+        emf.close();
         return project;
     }
 
@@ -67,6 +74,7 @@ public class ProjectsRS {
             this.em.remove(this.getProjectById(id));
         } finally {
             this.em.close();
+            emf.close();
         }
     }
 }
